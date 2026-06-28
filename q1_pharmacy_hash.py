@@ -1,14 +1,10 @@
 # =============================================================
 # 5022CMD Advanced Algorithms - Q1: Hashing
-# Pharmacy Inventory System using Hash Table (Linear Probing)
 # =============================================================
 
 import time
 
-
-# -------------------------------------------------------------
 # ENTITY CLASS: Medicine
-# -------------------------------------------------------------
 class Medicine:
     """Represents a pharmacy product (medicine)."""
 
@@ -26,18 +22,8 @@ class Medicine:
                 f"Qty: {self.quantity}")
 
 
-# -------------------------------------------------------------
 # HASH TABLE with LINEAR PROBING (Open Addressing)
-# -------------------------------------------------------------
 class HashTable:
-    """
-    Hash Table using Linear Probing for collision resolution.
-
-    Buckets are stored in a fixed-size Python list (array).
-    Each bucket holds either None (empty) or a Medicine object.
-    A second list (tombstones) tracks deleted slots so that
-    searches are not broken by gaps created by deletions.
-    """
 
     def __init__(self, size=20):
         self.size     = size
@@ -45,9 +31,7 @@ class HashTable:
         self.deleted  = [False] * size  # tombstone markers for deleted slots
         self.count    = 0               # number of active entries
 
-    # ----------------------------------------------------------
     # HASH FUNCTION
-    # ----------------------------------------------------------
     def _hash(self, key):
         """
         Convert a string key to a bucket index.
@@ -55,9 +39,7 @@ class HashTable:
         """
         return hash(key) % self.size
 
-    # ----------------------------------------------------------
     # INSERT
-    # ----------------------------------------------------------
     def insert(self, medicine):
         """Insert a Medicine object. Returns True on success."""
         if self.count >= self.size:
@@ -81,9 +63,7 @@ class HashTable:
 
         return False
 
-    # ----------------------------------------------------------
     # SEARCH
-    # ----------------------------------------------------------
     def search(self, product_id):
         """
         Search for a Medicine by product_id.
@@ -104,9 +84,7 @@ class HashTable:
 
         return None
 
-    # ----------------------------------------------------------
     # DELETE (optional – uses tombstone)
-    # ----------------------------------------------------------
     def delete(self, product_id):
         """Mark a slot as deleted (tombstone approach)."""
         index = self._hash(product_id)
@@ -126,9 +104,7 @@ class HashTable:
 
         return False
 
-    # ----------------------------------------------------------
     # DISPLAY ALL
-    # ----------------------------------------------------------
     def display(self):
         """Print all active records in the hash table."""
         print("\n" + "=" * 75)
@@ -149,14 +125,9 @@ class HashTable:
         print(f"  Total items: {self.count}")
 
 
-# -------------------------------------------------------------
 # PERFORMANCE COMPARISON: Hash Table vs 1-D Array
-# -------------------------------------------------------------
 def performance_comparison(hash_table, array, search_keys):
-    """
-    Compare search performance between the Hash Table and a plain array.
-    Performs multiple searches (existing and non-existing keys).
-    """
+
     print("\n" + "=" * 65)
     print(f"{'PERFORMANCE COMPARISON: Hash Table vs Array':^65}")
     print("=" * 65)
@@ -190,19 +161,8 @@ def performance_comparison(hash_table, array, search_keys):
             ratio = arr_time / ht_time if ht_time > 0 else float('inf')
             print(f"  Speedup    : Hash Table is ~{ratio:.1f}x faster")
 
-    print("\n" + "-" * 65)
-    print("  ANALYSIS:")
-    print("  Hash Table (Linear Probing) achieves O(1) average-case search")
-    print("  because it computes the index directly via the hash function.")
-    print("  Array linear search is O(n) — it scans every element until")
-    print("  the key is found (or the list is exhausted).")
-    print("  As n grows, the performance gap widens significantly.")
-    print("=" * 65)
 
-
-# -------------------------------------------------------------
 # SAMPLE DATA
-# -------------------------------------------------------------
 SAMPLE_MEDICINES = [
     Medicine("MED001", "Paracetamol 500mg",  "Tablet",     2.50,  200),
     Medicine("MED002", "Ibuprofen 200mg",    "Tablet",     4.80,  150),
@@ -217,11 +177,8 @@ SAMPLE_MEDICINES = [
 ]
 
 
-# -------------------------------------------------------------
 # COMMAND-LINE INVENTORY SYSTEM (Menu)
-# -------------------------------------------------------------
 def menu():
-    """Main menu-driven CLI for the Pharmacy Inventory System."""
 
     # --- Initialise hash table and load sample data ---
     ht = HashTable(size=20)
@@ -307,8 +264,6 @@ def menu():
             print("  Invalid option. Please enter 1-6.")
 
 
-# -------------------------------------------------------------
 # ENTRY POINT
-# -------------------------------------------------------------
 if __name__ == "__main__":
     menu()

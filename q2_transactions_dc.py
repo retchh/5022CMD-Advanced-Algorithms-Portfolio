@@ -1,15 +1,12 @@
 # =============================================================
 # 5022CMD Advanced Algorithms - Q2: Divide and Conquer
-# Customer Transaction System using Merge Sort + Binary Search
 # =============================================================
 
 import time
 import random
 
 
-# -------------------------------------------------------------
 # ENTITY CLASS: Transaction
-# -------------------------------------------------------------
 class Transaction:
     """Represents a single customer transaction in an online shop."""
 
@@ -29,10 +26,8 @@ class Transaction:
                 f"{self.transaction_date}")
 
 
-# -------------------------------------------------------------
 # MERGE SORT (Divide and Conquer)
 # Global counter tracks recursive calls (optional feature)
-# -------------------------------------------------------------
 recursive_calls = 0  # counts MERGE_SORT calls for analysis
 
 
@@ -90,10 +85,8 @@ def merge(left, right, key):
     return result
 
 
-# -------------------------------------------------------------
 # BINARY SEARCH (Divide and Conquer) - recursive
 # Requires the list to be SORTED on transaction_id first
-# -------------------------------------------------------------
 def binary_search(arr, low, high, target_id):
     """
     Recursive binary search on transaction_id.
@@ -115,9 +108,9 @@ def binary_search(arr, low, high, target_id):
         return binary_search(arr, mid + 1, high, target_id)  # search RIGHT
 
 
-# -------------------------------------------------------------
+
 # LINEAR SEARCH (for comparison with Binary Search)
-# -------------------------------------------------------------
+
 def linear_search(arr, target_id):
     """Scan every element until the target is found. O(n)."""
     for index in range(len(arr)):
@@ -126,9 +119,7 @@ def linear_search(arr, target_id):
     return -1
 
 
-# -------------------------------------------------------------
 # SAMPLE DATASET (15 unsorted transaction records)
-# -------------------------------------------------------------
 def build_dataset():
     """Returns a list of unsorted Transaction objects."""
     data = [
@@ -151,9 +142,7 @@ def build_dataset():
     return data
 
 
-# -------------------------------------------------------------
 # DISPLAY HELPERS
-# -------------------------------------------------------------
 def display_transactions(arr, title="TRANSACTIONS"):
     print("\n" + "=" * 78)
     print(f"{title:^78}")
@@ -164,9 +153,7 @@ def display_transactions(arr, title="TRANSACTIONS"):
     print(f"  Total records: {len(arr)}")
 
 
-# -------------------------------------------------------------
 # PERFORMANCE COMPARISON: Merge Sort vs Binary Search
-# -------------------------------------------------------------
 def performance_comparison(data):
     """Measure execution time of Merge Sort and Binary Search."""
     global recursive_calls
@@ -192,20 +179,9 @@ def performance_comparison(data):
     print(f"  Merge Sort time         : {merge_time:>10} ns")
     print(f"  Merge Sort recursive calls: {recursive_calls}")
     print(f"  Binary Search time      : {bsearch_time:>10} ns")
-    print("\n  " + "-" * 60)
-    print("  ANALYSIS:")
-    print("  Merge Sort     -> O(n log n): it divides the list and merges,")
-    print("                    doing more work as it must order ALL elements.")
-    print("  Binary Search  -> O(log n) : it halves the search space each")
-    print("                    step, so it finishes far faster than sorting.")
-    print("  Sorting is inherently more expensive than a single search,")
-    print("  which is why Merge Sort takes longer than Binary Search.")
-    print("=" * 65)
+ 
 
-
-# -------------------------------------------------------------
 # COMPLEXITY TABLE (optional advanced feature)
-# -------------------------------------------------------------
 def complexity_table():
     print("\n" + "=" * 60)
     print(f"{'TIME COMPLEXITY ANALYSIS':^60}")
@@ -218,9 +194,7 @@ def complexity_table():
     print("=" * 60)
 
 
-# -------------------------------------------------------------
 # MENU-DRIVEN PROGRAM
-# -------------------------------------------------------------
 def menu():
     data = build_dataset()          # unsorted working list
     is_sorted = False               # track whether data is sorted
@@ -336,8 +310,6 @@ def menu():
             print("  Invalid option. Please enter 1-9.")
 
 
-# -------------------------------------------------------------
 # ENTRY POINT
-# -------------------------------------------------------------
 if __name__ == "__main__":
     menu()
